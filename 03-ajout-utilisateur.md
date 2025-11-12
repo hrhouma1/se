@@ -1,11 +1,7 @@
 
+
 <details>
-  <summary>☰ Menu</summary>
-
-
-
-
-
+  <summary>☰ Méthode 1</summary>
 
 
 # Windows Pro / Entreprise — tout au clic
@@ -119,7 +115,8 @@
 
 
 
-
+<details>
+  <summary>☰ Méthode 2</summary>
 
 # 1) Pré-requis & limites d’édition
 
@@ -376,3 +373,4 @@ Add-LocalGroupMember -Group 'Remote Desktop Users' -Member 'alice'
 * Désactiver : `Disable-LocalUser -Name 'nom'`
 * RDP : `Add-LocalGroupMember -Group 'Remote Desktop Users' -Member 'nom'`
 
+</details>
