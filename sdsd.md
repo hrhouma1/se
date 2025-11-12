@@ -310,3 +310,275 @@ Add-LocalGroupMember -Group 'Remote Desktop Users' -Member 'cours-prof'
 
 * Conserver le style sans icônes : utiliser <code><details></code>/<code><summary></code>, titres <code>#</code> clairs, blocs de code balisés (<code>bat</code>, <code>powershell</code>).
 * Ajouter, si besoin, une section « Livrables » et une « Grille d’évaluation » à la fin du README pour les TP.
+
+
+
+
+
+
+
+
+
+
+
+<details>
+  <summary><strong>Annexe — Toutes les commandes</strong></summary>
+
+
+## 
+
+### 1) Lanceurs rapides (Win + R)
+
+```text
+lusrmgr.msc           # Utilisateurs et groupes locaux (Pro/Entreprise/Éducation uniquement)
+compmgmt.msc          # Gestion de l’ordinateur
+netplwiz              # Gestion simple des comptes locaux (toutes éditions)
+control userpasswords2# Interface classique équivalente à netplwiz
+eventvwr.msc          # Observateur d’événements (journaux Security)
+mmc.exe lusrmgr.msc   # Ouvrir l’outil via la console MMC
+```
+
+> Remarque : `lusrmgr.msc` n’est pas disponible en édition Home.
+
+
+
+### 2) CMD (net.exe) — fonctionne aussi en Home
+
+#### 2.1 Lister comptes et groupes
+
+```bat
+net user
+net localgroup
+net localgroup administrators
+net localgroup "Remote Desktop Users"
+```
+
+#### 2.2 Créer / gérer un utilisateur
+
+```bat
+net user alice M0tDeP@ss! /add
+net user alice /active:no          & rem Désactiver
+net user alice /active:yes         & rem Réactiver
+net user alice /logonpasswordchg:yes  & rem Forcer changement mdp à la prochaine connexion
+net user alice /del                & rem Supprimer l’utilisateur
+```
+
+#### 2.3 Ajouter / retirer des groupes
+
+```bat
+net localgroup administrators alice /add
+net localgroup "Remote Desktop Users" alice /add
+net localgroup administrators alice /delete
+net localgroup "Remote Desktop Users" alice /delete
+```
+
+#### 2.4 Politiques de mot de passe (basique)
+
+```bat
+wmic useraccount where name='alice' set PasswordExpires=False
+```
+
+> Pour une gestion fine des stratégies, utiliser les stratégies locales (`secpol.msc`) ou des GPO (domaine).
+
+
+
+### 3) PowerShell (module LocalAccounts) — recommandé
+
+> Ouvrir **PowerShell en Administrateur**.
+
+#### 3.1 Lister comptes et groupes
+
+```powershell
+Get-LocalUser
+Get-LocalGroup
+Get-LocalGroupMember -Group 'Administrators'
+Get-LocalGroupMember -Group 'Remote Desktop Users'
+```
+
+#### 3.2 Créer un utilisateur avec mot de passe sécurisé
+
+```powershell
+$pwd = ConvertTo-SecureString 'M0tDeP@ss!' -AsPlainText -Force
+New-LocalUser -Name 'alice' -FullName 'Alice Martin' -Password $pwd -PasswordNeverExpires:$false
+```
+
+#### 3.3 Définir / réinitialiser mot de passe
+
+```powershell
+$pwd = ConvertTo-SecureString 'N0uv3auM0tDeP@ss!' -AsPlainText -Force
+Set-LocalUser -Name 'alice' -Password $pwd
+```
+
+#### 3.4 Activer / désactiver un compte
+
+```powershell
+Disable-LocalUser -Name 'alice'
+Enable-LocalUser  -Name 'alice'
+```
+
+#### 3.5 Ajouter / retirer des groupes
+
+```powershell
+Add-LocalGroupMember -Group 'Administrators' -Member 'alice'
+Add-LocalGroupMember -Group 'Remote Desktop Users' -Member 'alice'
+
+Remove-LocalGroupMember -Group 'Administrators' -Member 'alice'
+Remove-LocalGroupMember -Group 'Remote Desktop Users' -Member 'alice'
+```
+
+#### 3.6 Supprimer un utilisateur
+
+```powershell
+Remove-LocalUser -Name 'alice'
+```
+
+
+
+### 4) RDP (Bureau à distance) — attributions locales
+
+> Côté **Pro/Entreprise/Éducation**.
+
+#### 4.1 Ajouter un utilisateur au groupe RDP
+
+```powershell
+Add-LocalGroupMember -Group 'Remote Desktop Users' -Member 'alice'
+```
+
+#### 4.2 Vérifier appartenance
+
+```powershell
+Get-LocalGroupMember -Group 'Remote Desktop Users'
+```
+
+> L’hôte RDP n’existe pas en **Home** ; utiliser **Aide rapide** ou un outil tiers.
+
+---
+
+### 5) Gestion à distance (WinRM/PowerShell Remoting)
+
+#### 5.1 Activer WinRM sur la machine distante (Admin)
+
+```powershell
+Enable-PSRemoting -Force
+```
+
+#### 5.2 Ouvrir une session distante depuis votre poste
+
+```powershell
+Enter-PSSession -ComputerName PC-CIBLE -Credential (Get-Credential)
+# puis exécuter Get-LocalUser / New-LocalUser / Add-LocalGroupMember ... à distance
+```
+
+#### 5.3 Commandes ponctuelles sans session interactive
+
+```powershell
+Invoke-Command -ComputerName PC-CIBLE -Credential (Get-Credential) -ScriptBlock {
+  $pwd = ConvertTo-SecureString 'Temp123!' -AsPlainText -Force
+  New-LocalUser -Name 'invite' -Password $pwd
+  Add-LocalGroupMember -Group 'Users' -Member 'invite'
+}
+```
+
+---
+
+### 6) Audit et journalisation (Observateur d’événements)
+
+#### 6.1 Ouvrir les journaux
+
+```text
+eventvwr.msc
+```
+
+Naviguer : Journaux Windows → **Security**.
+Événements utiles : connexions réussies/échouées, changements d’appartenance aux groupes, etc.
+(Le cas échéant, activer l’audit dans la stratégie de sécurité locale ou via GPO.)
+
+
+
+### 7) Modèles de commandes “réutilisables”
+
+#### 7.1 Création standard (nom et mot de passe variables)
+
+```powershell
+# PowerShell
+param(
+  [string]$User = 'cours-prof',
+  [string]$Pwd  = 'N0uV3@u!'
+)
+$secure = ConvertTo-SecureString $Pwd -AsPlainText -Force
+New-LocalUser -Name $User -Password $secure
+```
+
+```bat
+:: CMD
+set USER=cours-prof
+set PASS=N0uV3@u!
+net user %USER% %PASS% /add
+```
+
+#### 7.2 Promotion en administrateur + RDP (si disponible)
+
+```powershell
+$u = 'support-admin'
+$pwd = ConvertTo-SecureString 'Adm1n-Urgence!' -AsPlainText -Force
+New-LocalUser -Name $u -Password $pwd
+Add-LocalGroupMember -Group 'Administrators' -Member $u
+Add-LocalGroupMember -Group 'Remote Desktop Users' -Member $u  # Pro/Entreprise
+```
+
+#### 7.3 Compte temporaire expirant dans 7 jours
+
+```powershell
+$pwd = ConvertTo-SecureString 'Temp123!' -AsPlainText -Force
+New-LocalUser -Name 'invite' -Password $pwd
+Set-LocalUser -Name 'invite' -AccountExpires (Get-Date).AddDays(7)
+```
+
+#### 7.4 Vérifications rapides
+
+```powershell
+Get-LocalUser | Format-Table Name,Enabled,LastLogon
+Get-LocalGroupMember -Group 'Administrators'
+Get-LocalGroupMember -Group 'Remote Desktop Users'
+```
+
+
+
+### 8) Points d’attention et équivalences
+
+* **Forcer le changement de mot de passe à la prochaine connexion** :
+
+  * CMD : `net user alice /logonpasswordchg:yes`
+  * PowerShell (LocalAccounts) ne fournit pas de commutateur direct → utiliser `net.exe` ou une stratégie (GPO).
+
+* **Expiration de mot de passe** :
+
+  * Exemple basique CMD : `wmic useraccount where name='alice' set PasswordExpires=False`
+  * Préférer les **stratégies** (locales/domaine) pour la conformité.
+
+* **Édition Home** : pas de `lusrmgr.msc` ni d’hôte RDP. Utiliser **Paramètres**, **netplwiz**, **CMD/PowerShell** et **Aide rapide** pour l’assistance.
+
+
+
+#### Annexe condensée (copier-coller rapide)
+
+```bat
+:: CMD — créer + admin + RDP
+net user support-admin Adm1n-Urgence! /add
+net localgroup administrators support-admin /add
+net localgroup "Remote Desktop Users" support-admin /add
+```
+
+```powershell
+# PowerShell — créer standard + vérifs
+$pwd = ConvertTo-SecureString 'N0uV3@u!' -AsPlainText -Force
+New-LocalUser -Name 'cours-prof' -FullName 'Compte Cours Prof' -Password $pwd
+Get-LocalUser
+Get-LocalGroupMember -Group 'Administrators'
+```
+
+---
+
+> Intègre cette **Annexe — Toutes les commandes** en bas de ton README ; elle complète parfaitement tes sections GUI/CLI et sert de “cheat-sheet” exhaustive en TP.
+
+</details>
