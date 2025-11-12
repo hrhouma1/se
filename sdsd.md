@@ -1,6 +1,4 @@
-Voici une version **pro – sans emojis**, pensée pour un **README GitHub** : titres propres, sommaire cliquable, sections pliables, libellés homogènes, checklists et blocs de code soignés. Tu peux coller tel quel.
 
----
 
 # Énoncé — Ajout et gestion des comptes locaux sous Windows (Pro/Entreprise & Home)
 
@@ -18,7 +16,7 @@ Voici une version **pro – sans emojis**, pensée pour un **README GitHub** : t
 * [Dépannage](#dépannage)
 * [Fiche mémo](#fiche-mémo)
 
----
+
 
 <details>
   <summary><strong>Objectif</strong></summary>
@@ -136,7 +134,7 @@ Utilisateurs → double-clic compte → onglet Général → (dé)cocher Compte 
 
 </details>
 
----
+
 
 ### Windows Home — tout au clic (sans “Utilisateurs et groupes locaux”)
 
@@ -163,7 +161,7 @@ Note : pas de rôle serveur RDP en Home.
 
 </details>
 
----
+
 
 ## Correction — Méthode 2 · Windows Pro / Entreprise — lignes de commande
 
@@ -236,8 +234,6 @@ Set-LocalUser -Name 'alice' -Password $pwd
 Remove-LocalUser -Name 'alice'
 ```
 
----
-
 ## Scénarios rapides
 
 <details>
@@ -284,7 +280,7 @@ Add-LocalGroupMember -Group 'Remote Desktop Users' -Member 'cours-prof'
 
 </details>
 
----
+
 
 ## Dépannage
 
@@ -293,7 +289,7 @@ Add-LocalGroupMember -Group 'Remote Desktop Users' -Member 'cours-prof'
 * MMC vide à distance : pare-feu/ports DCOM/Remote Registry, droits admin distants.
 * Échec d’ajout au groupe : orthographe compte/groupe, compte bien local (pas Microsoft/cloud).
 
----
+
 
 ## Fiche mémo
 
@@ -309,7 +305,6 @@ Add-LocalGroupMember -Group 'Remote Desktop Users' -Member 'cours-prof'
 * Désactiver : <code>Disable-LocalUser -Name 'nom'</code>
 * RDP : <code>Add-LocalGroupMember -Group 'Remote Desktop Users' -Member 'nom'</code>
 
----
 
 **Astuce de mise en forme GitHub**
 
