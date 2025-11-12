@@ -1,11 +1,11 @@
 # Énoncé — Ajout et gestion des comptes locaux sous Windows (Pro/Entreprise & Home)
 
-## Objectif
-
 <details>
-  <summary>
+  <summary> ## Objectif  </summary> 
+
+
 Mettre en place, pas à pas, la gestion des comptes **locaux** sous Windows 10/11 : création d’utilisateurs standard, élévation en administrateur, attribution de l’accès **Bureau à distance (RDP)**, réinitialisation/désactivation de comptes, et sécurisation des comptes intégrés. Deux approches sont proposées : **tout au clic (GUI)** et **en ligne de commande (CMD/PowerShell)**.
-  </summary> 
+
 
   </details>
   
