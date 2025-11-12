@@ -1,4 +1,61 @@
+# Énoncé — Ajout et gestion des comptes locaux sous Windows (Pro/Entreprise & Home)
 
+## Objectif
+
+Mettre en place, pas à pas, la gestion des comptes **locaux** sous Windows 10/11 : création d’utilisateurs standard, élévation en administrateur, attribution de l’accès **Bureau à distance (RDP)**, réinitialisation/désactivation de comptes, et sécurisation des comptes intégrés. Deux approches sont proposées : **tout au clic (GUI)** et **en ligne de commande (CMD/PowerShell)**.
+
+## Contexte
+
+Dans un poste de travail ou un labo pédagogique, il est souvent nécessaire d’ajouter rapidement un compte “cours-prof” (standard), un compte “support-admin” (administrateur local), ou un compte “invité” temporaire, tout en respectant les bonnes pratiques de sécurité.
+
+## Compétences visées
+
+* Naviguer dans les consoles Windows (*Gestion de l’ordinateur*, `lusrmgr.msc`, `netplwiz`).
+* Créer/administrer des comptes et des groupes locaux (Users, Administrators, Remote Desktop Users).
+* Exécuter l’équivalent en **CMD** (`net.exe`) et en **PowerShell** (module **LocalAccounts**).
+* Appliquer des règles de base de **sécurisation** (désactivation de *Guest*, mot de passe robuste, journalisation).
+
+## Prérequis
+
+* Windows **Pro/Entreprise/Éducation** pour `lusrmgr.msc`.
+* Windows **Home** : utiliser **Paramètres**, **Panneau de configuration**, **CMD/PowerShell** (*pas* de `lusrmgr.msc` ni d’hôte RDP).
+* Session **administrateur** locale pour toutes les opérations système.
+
+## Consignes de réalisation
+
+1. **Choisis une méthode** (Méthode 1 : GUI, Méthode 2 : CMD/PowerShell). Les deux peuvent être réalisées pour bonus.
+2. **Crée** un compte standard nommé `cours-prof` (ou équivalent), avec mot de passe défini.
+3. **Crée** un compte admin local `support-admin` et ajoute-le au groupe **Administrators**.
+4. **(Option Pro/Entreprise)** Ajoute `cours-prof` au groupe **Remote Desktop Users** (et **active RDP** côté Paramètres).
+5. **Sécurise** : désactive le compte **Guest** et laisse l’**Administrator** intégré désactivé si un autre admin existe.
+6. **Teste** : connexion, changement/réinitialisation de mot de passe, désactivation/réactivation d’un compte.
+7. **(PowerShell/CMD)** Répète les opérations en ligne de commande et conserve l’historique.
+
+## Livrables attendus
+
+* **Rapport bref** (1–2 pages) listant : étapes réalisées, choix (GUI vs CLI), difficultés et solutions.
+* **Captures d’écran** clefs (ou sorties de commandes) : création de compte, appartenance aux groupes, RDP, désactivation de *Guest*.
+* **Cheat-sheet** personnelle : 5–10 commandes PowerShell/CMD que tu retiens pour refaire l’exercice rapidement.
+
+## Critères d’évaluation
+
+* Exactitude technique (comptes créés, groupes appropriés, RDP correctement attribué en Pro/Entreprise).
+* Maîtrise des **deux** niveaux : GUI **ou** CLI (bonus si les deux).
+* Sécurité minimale appliquée (Guest désactivé, mots de passe robustes, admin intégré non utilisé au quotidien).
+* Clarté du rapport et pertinence des preuves (captures/sorties).
+
+## Rappels sécurité & limites
+
+* Ne partage **jamais** de mot de passe en clair dans le rapport public.
+* Windows **Home** n’expose pas le rôle serveur RDP : utiliser **Aide rapide** ou un outil tiers pour l’assistance distante.
+* Journalisez et surveillez les échecs de connexion (**Observateur d’événements → Security**).
+
+**Durée indicative** : 30–45 min (GUI) ; 20–30 min (CLI) après prise en main.
+
+
+
+
+# Correction
 
 <details>
   <summary>☰ Méthode 1 - Windows Pro / Entreprise — Ajout d'utilisateurs tout au clic </summary>
