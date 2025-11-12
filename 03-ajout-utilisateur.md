@@ -2,8 +2,13 @@
 
 ## Objectif
 
+<details>
+  <summary>
 Mettre en place, pas à pas, la gestion des comptes **locaux** sous Windows 10/11 : création d’utilisateurs standard, élévation en administrateur, attribution de l’accès **Bureau à distance (RDP)**, réinitialisation/désactivation de comptes, et sécurisation des comptes intégrés. Deux approches sont proposées : **tout au clic (GUI)** et **en ligne de commande (CMD/PowerShell)**.
+  </summary> 
 
+  </details>
+  
 ## Contexte
 
 Dans un poste de travail ou un labo pédagogique, il est souvent nécessaire d’ajouter rapidement un compte “cours-prof” (standard), un compte “support-admin” (administrateur local), ou un compte “invité” temporaire, tout en respectant les bonnes pratiques de sécurité.
