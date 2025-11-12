@@ -2,11 +2,8 @@
 <details>
   <summary>☰ Menu</summary>
 
-  - [Accueil](#)
-  - [Installation](#)
-  - [Guide rapide](#)
-  - [FAQ](#)
-</details>
+
+
 
 
 
@@ -106,7 +103,7 @@
 * Tu ne trouves pas **Panneau de configuration** → ouvre le **Menu Démarrer** et tape “Panneau de configuration”, puis choisis **Catégorie** → **Comptes d’utilisateurs**.
 
 
-
+</details>
 
 
 
