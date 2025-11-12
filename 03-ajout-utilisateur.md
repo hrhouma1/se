@@ -1,3 +1,129 @@
+
+<details>
+  <summary>☰ Menu</summary>
+
+  - [Accueil](#)
+  - [Installation](#)
+  - [Guide rapide](#)
+  - [FAQ](#)
+</details>
+
+
+
+
+# Windows Pro / Entreprise — tout au clic
+
+## A. Ouvrir l’outil
+
+1. Ouvre le **Menu Démarrer** → tape **“Gestion de l’ordinateur”** → clique sur l’application.
+2. Dans la fenêtre, à gauche : **Outils système** → **Utilisateurs et groupes locaux**.
+
+   * Si tu vois *Utilisateurs* et *Groupes*, tu es au bon endroit.
+
+## B. Créer un utilisateur local (non admin)
+
+1. **Utilisateurs** (colonne de gauche) → clic droit dans la liste → **Nouvel utilisateur…**
+2. Renseigne **Nom d’utilisateur**, **Mot de passe** (deux fois).
+3. Décoche **L’utilisateur doit changer de mot de passe…** si tu veux un mot de passe fixe.
+4. Clique **Créer**, puis **Fermer**.
+
+## C. Passer un compte en administrateur
+
+1. Va dans **Groupes** → double-clique **Administrators**.
+2. **Ajouter…** → tape le **nom** du compte créé → **OK** → **Appliquer / OK**.
+
+## D. Autoriser l’accès Bureau à distance (RDP)
+
+1. **Groupes** → double-clique **Remote Desktop Users**.
+2. **Ajouter…** → choisis le compte → **OK** → **Appliquer / OK**.
+
+   > (RDP doit être activé dans *Paramètres* → *Système* → *Bureau à distance*.)
+
+## E. Réinitialiser le mot de passe
+
+1. **Utilisateurs** → clic droit sur le compte → **Définir le mot de passe…** → **Continuer** → nouveau mot de passe → **OK**.
+
+## F. Désactiver / réactiver un compte
+
+1. **Utilisateurs** → double-clique le compte → onglet **Général**.
+2. Coche **Compte désactivé** (ou décoche pour réactiver) → **OK**.
+
+## G. Sécuriser les comptes intégrés
+
+* **Guest** : double-clique → **Compte désactivé** (recommandé).
+* **Administrator** intégré : laisse-le **désactivé** si tu as déjà un autre admin.
+
+---
+
+# Windows Home — tout au clic (sans “Utilisateurs et groupes locaux”)
+
+## A. Créer un compte local
+
+1. **Paramètres** → **Comptes** → **Famille et autres utilisateurs**.
+2. Section **Autres utilisateurs** → **Ajouter un compte**.
+3. Clique **Je ne dispose pas des informations de connexion de cette personne**.
+4. Clique **Ajouter un utilisateur sans compte Microsoft**.
+5. Saisis **Nom d’utilisateur** + **Mot de passe** → **Suivant**.
+
+## B. Passer le compte en administrateur
+
+1. Reviens à **Paramètres** → **Comptes** → **Famille et autres utilisateurs**.
+2. Sous **Autres utilisateurs**, clique le compte → **Changer le type de compte**.
+3. Choisis **Administrateur** → **OK**.
+
+## C. Changer le mot de passe d’un compte local
+
+1. **Panneau de configuration** (app classique) → **Comptes d’utilisateurs** → **Gérer un autre compte**.
+2. Sélectionne le compte → **Modifier le mot de passe**.
+
+> Note : Windows Home **ne propose pas** le rôle “Remote Desktop Users” côté serveur (la fonctionnalité hôte RDP n’est pas incluse). Pour un accès à distance, utilise plutôt **Assistant d’accès rapide** (Paramètres → Système → **Aide rapide**) ou un outil tiers.
+
+---
+
+# Petits scénarios guidés
+
+## Créer un compte “cours-prof” non admin (Pro/Entreprise)
+
+1. *Gestion de l’ordinateur* → *Utilisateurs et groupes locaux* → **Utilisateurs** → **Nouvel utilisateur…**
+2. Renseigne le profil → **Créer**.
+3. Laisse-le tel quel (il reste *Users*).
+
+## Créer un compte “support-admin” (Pro/Entreprise)
+
+1. Crée l’utilisateur (comme ci-dessus).
+2. *Groupes* → **Administrators** → **Ajouter…** → sélectionne le compte → **OK**.
+
+## Désactiver “Guest” (Pro/Entreprise)
+
+1. *Utilisateurs* → double-clique **Guest** → coche **Compte désactivé** → **OK**.
+
+---
+
+# Où cliquer si quelque chose “n’apparaît pas” ?
+
+* Tu ne vois pas *Utilisateurs et groupes locaux* dans **Gestion de l’ordinateur** → tu es sûrement sur **Windows Home** (utilise la section Home ci-dessus).
+* Le bouton **Changer le type de compte** est grisé → tu es connecté avec un compte **non administrateur** (connecte-toi avec un admin).
+* Tu ne trouves pas **Panneau de configuration** → ouvre le **Menu Démarrer** et tape “Panneau de configuration”, puis choisis **Catégorie** → **Comptes d’utilisateurs**.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 1) Pré-requis & limites d’édition
 
 * Disponible nativement via le composant **MMC** `lusrmgr.msc` sur **Windows Pro/Enterprise/Education**.
