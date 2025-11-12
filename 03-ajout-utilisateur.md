@@ -1,7 +1,7 @@
 
 
 <details>
-  <summary>☰ Méthode 1</summary>
+  <summary>☰ Méthode 1 - Windows Pro / Entreprise — Ajout d'utilisateurs tout au clic </summary>
 
 
 # Windows Pro / Entreprise — tout au clic
@@ -116,7 +116,7 @@
 
 
 <details>
-  <summary>☰ Méthode 2</summary>
+  <summary>☰ Méthode 2 - Windows Pro / Entreprise — Ajout d'utilisateurs avec les ligne de commandes </summary>
 
 # 1) Pré-requis & limites d’édition
 
