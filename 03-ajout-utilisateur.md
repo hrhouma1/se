@@ -32,7 +32,7 @@ Dans un poste de travail ou un labo pédagogique, il est souvent nécessaire d�
 
  
  <details>
-  <summary> Compétences visées  </summary> Prérequis
+  <summary> Prérequis </summary> 
 
 * Windows **Pro/Entreprise/Éducation** pour `lusrmgr.msc`.
 * Windows **Home** : utiliser **Paramètres**, **Panneau de configuration**, **CMD/PowerShell** (*pas* de `lusrmgr.msc` ni d’hôte RDP).
@@ -52,7 +52,7 @@ Dans un poste de travail ou un labo pédagogique, il est souvent nécessaire d�
  </details>
 
  <details>
-  <summary> Compétences visées  </summary>  Rappels sécurité & limites
+  <summary> Rappels sécurité & limites  </summary>  
 
 * Ne partage **jamais** de mot de passe en clair dans le rapport public.
 * Windows **Home** n’expose pas le rôle serveur RDP : utiliser **Aide rapide** ou un outil tiers pour l’assistance distante.
